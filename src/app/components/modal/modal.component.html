@@ -1,0 +1,63 @@
+<mat-card>
+
+    <form [formGroup]="enviarTrabajador">
+        
+        <div class="dividir"> 
+            
+            <mat-form-field appearance="outline">
+                <mat-label>Nombres</mat-label>
+                <input matInput placeholder="Nombre" formControlName="nombre">
+                <mat-error *ngIf="enviarTrabajador.get('nombre').hasError('required')">Es requerido</mat-error>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Apellidos</mat-label>
+                <input matInput placeholder="apellidos" formControlName="apellidos">
+                <mat-error *ngIf="enviarTrabajador.get('apellidos').hasError('required')">Es requerido</mat-error>
+            </mat-form-field>
+        </div>
+    
+        <div class="dividir">
+            <mat-form-field>
+                <mat-select placeholder="cargo" class="cargo" formControlName="cargo"  (selectionChange)="selectCargo($event)">
+                    <mat-option *ngFor="let cargo of cargos" [value]="cargo.id">
+                      {{cargo.cargo}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+    
+            
+            <mat-form-field appearance="outline">
+                <mat-label>Correo</mat-label>
+                <input matInput placeholder="Correo" formControlName="correo">
+                <mat-error *ngIf="enviarTrabajador.get('correo').hasError('required')">Es requerido</mat-error>
+                <mat-error *ngIf="enviarTrabajador.get('correo').hasError('email')">Formato de email</mat-error>
+            </mat-form-field>
+        </div>
+    
+        <div class="dividr">
+            
+            <mat-slider class="example-margin" max="1900" min="500" formControlName="salario"></mat-slider>
+            <div *ngIf="enviarTrabajador">
+                <p>{{this.enviarTrabajador.get('salario').value}}</p>
+            </div>
+        </div>
+
+    </form>
+
+    <p> (*) Campos Obligatorios</p>
+
+    <div class="submit">
+        <div class="submit__data">
+            <button mat-raised-button color="primary" (click)="cancelar()">Cancelar</button>
+            <button class="btn-aceptar" mat-raised-button color="primary" (click)="updateOrCreateTrabajador()">{{buttonName}}</button>
+        </div>
+    </div>
+
+
+
+</mat-card>
+
+
+

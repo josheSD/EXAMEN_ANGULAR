@@ -1,0 +1,74 @@
+<div *ngIf="!mostrarData">
+    <p>cargando ...</p>
+</div>
+
+<div class="registrar">
+    <button mat-raised-button color="primary" (click)="openDialog(0)">Registrar</button>
+</div>
+
+<mat-table [dataSource]="SubmitData" *ngIf="mostrarData">
+    <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            {{row.nombre}}
+            {{row.apellidos.split(' ')[0]}}
+            <div class="m-l" *ngIf="row.apellidos.split(' ')[1]">
+                {{row.apellidos.split(' ')[1].substr(0,1)}}
+            </div>
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="salario">
+        <mat-header-cell *matHeaderCellDef>Salario</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            $ {{row.salario}}.00
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="estado">
+        <mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <div *ngIf="row.salario >= 500 && row.salario <= 1000">
+                <div>
+                    Bajo
+                </div>
+            </div>
+            <div *ngIf="row.salario >= 1001 && row.salario <= 1500">
+                <div>
+                    Medio
+                </div>
+            </div>
+            <div *ngIf="row.salario >= 1501 && row.salario <= 1900">
+                <div>
+                    Alto
+                </div>
+            </div>
+            <div *ngIf="row.salario >= 1901">
+                <div>
+                    Muy alto
+                </div>
+            </div>
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="cargo">
+        <mat-header-cell *matHeaderCellDef>Cargo</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            {{row.cargo}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ver">
+        <mat-header-cell *matHeaderCellDef>Ver</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <button mat-raised-button color="primary" [routerLink]="['/perfil',row.id]">ver perfil</button>        
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="borrar">
+        <mat-header-cell *matHeaderCellDef>Borrar</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <button mat-raised-button color="primary" (click)="borrarTrabajador(row.id)">borrar</button>
+        </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="SubmitDisplayColumns"></mat-header-row>
+    <mat-row *matRowDef="let emailRow; columns: SubmitDisplayColumns"></mat-row>
+</mat-table>
+
+<mat-paginator #SubmitPaginator [length]="SubmitTotalCount" [pageIndex]="0" [pageSize]="SubmitCurrentPage.pageSize" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
+</mat-paginator>

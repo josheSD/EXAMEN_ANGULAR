@@ -1,0 +1,58 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.header{
+    display:flex;
+    justify-content: space-between;
+    width:100vw;
+
+    &__left{
+        display:flex;
+        align-items: center;
+    }
+}
+
+.header__left span{
+    margin-left:10px;
+}
+
+.dividir{
+    display:flex;
+    justify-content: space-between;
+}
+
+.dividir > * {
+    width:48%;
+}
+
+.submit{
+    margin-top:10px !important;
+    display:flex;
+    justify-content: flex-end;
+}
+
+.btn-aceptar{
+    margin-left:20px !important;
+}
+
+.cargo{
+    margin-top: 20px;
+    margin-right: 60px;
+}
+
+.registrar{
+    display:flex;
+    justify-content: flex-end;
+    margin:20px 10px 20px 0px;
+}
+
+.m-l{
+    margin-left:5px !important
+}
+
+.espacios{
+    margin-left:10px !important;
+    margin-top:10px !important;
+}
